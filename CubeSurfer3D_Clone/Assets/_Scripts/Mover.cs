@@ -6,15 +6,17 @@ public class Mover
 {
     PlayerController _playerController;
     Rigidbody rb;
-
     public Mover(PlayerController playerController)
     {
-        rb = playerController.GetComponent<Rigidbody>();
         _playerController = playerController;
+        rb = _playerController.GetComponent<Rigidbody>();
     }
-
-    public void Active(float horizontalSpeed, float verticalSpeed)
+    public void Active(float valueX, float valueZ)
     {
-        rb.velocity = new Vector3(verticalSpeed * Time.deltaTime, 0, horizontalSpeed * Time.deltaTime);
+        float amountX = (valueX * Time.deltaTime) / 100;
+        float amountZ = (valueZ * Time.deltaTime);
+        Vector3 newPos = _playerController.transform.position + new Vector3(amountX, 0, amountZ);
+        newPos.x = Mathf.Clamp(newPos.x, -2f, 2f);
+        rb.MovePosition(newPos);
     }
 }
