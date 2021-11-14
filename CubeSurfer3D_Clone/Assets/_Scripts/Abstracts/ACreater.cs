@@ -11,7 +11,7 @@ public abstract class ACreater : MonoBehaviour
         {
             GameObject gObject = Instantiate(go, pos, transform.rotation);
             gObject.transform.parent = transform;
-            pos += Vector3.up;
+            pos += Vector3.up+new Vector3(0,0.1f,0);
         }
     }
 }

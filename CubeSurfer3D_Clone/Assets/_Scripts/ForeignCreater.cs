@@ -10,7 +10,7 @@ public class ForeignCreater : ACreater
  
     void Start()
     {
-        Create(go,count);   
+        Create(go, count);   
     }
     public override void Create(GameObject go, int count)
     {

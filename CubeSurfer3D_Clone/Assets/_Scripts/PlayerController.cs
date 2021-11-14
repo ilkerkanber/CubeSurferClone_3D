@@ -6,22 +6,18 @@ public class PlayerController : MonoBehaviour
 {
     [SerializeField] float VerticalSpeed;
     [SerializeField] float HorizontalSpeed;
-    [SerializeField] Bag bag;
+    [SerializeField] Bag _bag;
 
     Mover _mover;
     InputController _inputController;
 
-
     float inputValue;
-    float bugTimer;
+  
     void Awake()
     {
+        Physics.gravity = new Vector3(0, -30F, 0);
         _mover = new Mover(this);
         _inputController = new InputController();
-    }
-    void Start()
-    {
-
     }
     void Update()
     {
@@ -33,23 +29,13 @@ public class PlayerController : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (Time.time < bugTimer + 0.5f)
+        if (collision.collider.transform.parent == null)
         {
             return;
         }
-        if (collision.collider.transform.parent.TryGetComponent<ForeignCreater>(out ForeignCreater foreignCreater))
+        if (collision.collider.transform.parent.TryGetComponent<AllyCreater>(out AllyCreater allyCreater))
         {
-            if (!foreignCreater.IsCollision)
-            {
-                foreignCreater.IsCollision = true;
-                bag.RemoveCube(foreignCreater.count);
-            }
+            _bag.AddCube(collision.collider.transform.parent.gameObject, allyCreater.count);
         }
-        else if(collision.collider.transform.parent.TryGetComponent<AllyCreater>(out AllyCreater allyCreater))
-        {
-            bag.AddCube(collision.collider.transform.parent.gameObject, allyCreater.count);
-        }
-        bugTimer = Time.time;
-
     }
 }
