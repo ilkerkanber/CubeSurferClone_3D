@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelCreater : MonoBehaviour
 {
+    [SerializeField] GameObject player;
     [Header("ROAD OPTIONS")]
     [SerializeField] GameObject road;
     [Space]
@@ -12,10 +13,15 @@ public class LevelCreater : MonoBehaviour
     [SerializeField] List<GameObject> collectables;
 
     GameObject parent;
-    void Awake()
+    void Start()
     {
         CreateParent();
         CreateRoad(10);
+        CreatePlayer();
+    }
+    void CreatePlayer()
+    {
+        Instantiate(player, Vector3.zero, player.transform.rotation,parent.transform);
     }
     void CreateParent()
     {

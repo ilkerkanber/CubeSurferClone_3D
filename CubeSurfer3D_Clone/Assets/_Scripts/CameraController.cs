@@ -5,6 +5,13 @@ using UnityEngine;
 public class CameraController : MonoBehaviour
 {
     [SerializeField] GameObject target;
+    void Update()
+    {
+        if (target == null)
+        {
+            target = FindObjectOfType<PlayerController>().gameObject;
+        }
+    }
     void LateUpdate()
     {
         WatchTarget();

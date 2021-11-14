@@ -18,10 +18,6 @@ public class PlayerController : MonoBehaviour
         _mover = new Mover(this);
         _inputController = new InputController();
     }
-    void Start()
-    {
-        //Physics.gravity = new Vector3(0, -30F, 0);
-    }
     void Update()
     {
         inputValue = _inputController.GetInput();
@@ -37,9 +33,9 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position + pos, Vector3.forward, out hit, 0.1f))
         {
-            if (hit.collider.transform.parent.TryGetComponent<AllyCreater>(out AllyCreater allyCreater))
+            if (hit.collider.transform.parent.parent.TryGetComponent<AllyCreater>(out AllyCreater allyCreater))
             {
-                _bag.AddCube(hit.collider.transform.parent.gameObject, allyCreater.count);
+                _bag.AddCube(hit.collider.transform.parent.gameObject, allyCreater.columnCount);
             }
         }
     }

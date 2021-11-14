@@ -43,7 +43,7 @@ public class Bag : MonoBehaviour
     {
         for(int i = 0; i < bag.Count; i++)
         {
-            bag[i].transform.position += Vector3.up + new Vector3(0, 0.1f, 0);
+            bag[i].transform.position += Vector3.up;
         }
     }
 }

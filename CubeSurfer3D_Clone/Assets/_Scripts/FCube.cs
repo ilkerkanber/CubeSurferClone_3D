@@ -4,11 +4,16 @@ using UnityEngine;
 
 public class FCube : MonoBehaviour
 {
+    GameObject trash;
     RaycastHit hit;
+    void Awake()
+    {
+        trash = GameObject.FindGameObjectWithTag("TRASH");
+    }
     void FixedUpdate()
     {
-        CollisionControl(new Vector3(0.49f, 0, -0.6f));//LEFT
-        CollisionControl(new Vector3(-0.49f, 0, -0.6f));//RIGHT
+        CollisionControl(new Vector3(0.49f, 0, -0.6f));
+        CollisionControl(new Vector3(-0.49f, 0, -0.6f));
     }
     void CollisionControl(Vector3 pos)
     {
@@ -22,11 +27,10 @@ public class FCube : MonoBehaviour
             {
                 return;
             }
-            Debug.Log(hit.collider);
             if (hit.collider.transform.parent.GetComponent<Bag>())
             {
                 GameObject go = hit.collider.gameObject;
-                go.transform.parent = null;
+                go.transform.parent = trash.transform;
             }
         }
     }
