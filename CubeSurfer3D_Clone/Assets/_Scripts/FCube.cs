@@ -18,6 +18,11 @@ public class FCube : MonoBehaviour
             {
                 return;
             }
+            if (hit.collider.transform.parent == null)
+            {
+                return;
+            }
+            Debug.Log(hit.collider);
             if (hit.collider.transform.parent.GetComponent<Bag>())
             {
                 GameObject go = hit.collider.gameObject;

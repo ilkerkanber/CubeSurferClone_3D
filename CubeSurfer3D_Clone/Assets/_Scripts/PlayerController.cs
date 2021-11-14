@@ -15,9 +15,12 @@ public class PlayerController : MonoBehaviour
   
     void Awake()
     {
-        Physics.gravity = new Vector3(0, -30F, 0);
         _mover = new Mover(this);
         _inputController = new InputController();
+    }
+    void Start()
+    {
+        //Physics.gravity = new Vector3(0, -30F, 0);
     }
     void Update()
     {
@@ -26,16 +29,19 @@ public class PlayerController : MonoBehaviour
     void FixedUpdate()
     {
         _mover.Active((HorizontalSpeed * inputValue), VerticalSpeed);
+        CollisionEnter(new Vector3(-0.49f, 0, 0.6f));
+        CollisionEnter(new Vector3(0.49f, 0, 0.6f));
     }
-    void OnCollisionEnter(Collision collision)
+    void CollisionEnter(Vector3 pos)
     {
-        if (collision.collider.transform.parent == null)
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position + pos, Vector3.forward, out hit, 0.1f))
         {
-            return;
-        }
-        if (collision.collider.transform.parent.TryGetComponent<AllyCreater>(out AllyCreater allyCreater))
-        {
-            _bag.AddCube(collision.collider.transform.parent.gameObject, allyCreater.count);
+            if (hit.collider.transform.parent.TryGetComponent<AllyCreater>(out AllyCreater allyCreater))
+            {
+                _bag.AddCube(hit.collider.transform.parent.gameObject, allyCreater.count);
+            }
         }
     }
+
 }
