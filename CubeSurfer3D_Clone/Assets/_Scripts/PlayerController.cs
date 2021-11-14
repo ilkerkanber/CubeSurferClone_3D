@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(transform.position + pos, Vector3.forward, out hit, 0.1f))
         {
-            if (hit.collider.transform.parent.parent.TryGetComponent<AllyCreater>(out AllyCreater allyCreater))
+            if (hit.collider.transform.root.TryGetComponent<AllyCreater>(out AllyCreater allyCreater))
             {
                 _bag.AddCube(hit.collider.transform.parent.gameObject, allyCreater.columnCount);
             }
