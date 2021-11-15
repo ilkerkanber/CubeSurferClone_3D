@@ -7,13 +7,12 @@ public class ForeignCreater : ACreater
     [field: SerializeField] public int columnCount { get; private set; }
     [field: SerializeField] public int lineCount { get; private set; }
 
-    [SerializeField] GameObject go;
-    void Start()
+    public override void CreateFixed(GameObject go, int columnCount, int lineCount)
     {
-        Create(go, columnCount, lineCount);
+        base.CreateFixed(go, columnCount, lineCount);
     }
-    public override void Create(GameObject go, int columnCount, int lineCount)
+    public override void CreateRandom(GameObject go, int MinColumn, int MaxColumn, int lineCount)
     {
-        base.Create(go, columnCount, lineCount);
+        base.CreateRandom(go,MinColumn, MaxColumn, lineCount);
     }
 }

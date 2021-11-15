@@ -6,14 +6,9 @@ public class AllyCreater : ACreater
 {
     [field: SerializeField] public int columnCount { get; private set; }
 
-    [SerializeField] GameObject go;
-    void Start()
+    public override void CreateFixed(GameObject go, int _columnCount, int lineCount)
     {
-        Create(go, columnCount, 1);    
+        columnCount = _columnCount;
+        base.CreateFixed(go,columnCount, lineCount);
     }
-    public override void Create(GameObject go, int columnCount, int lineCount)
-    {
-        base.Create(go, columnCount, lineCount);
-    }
-
 }

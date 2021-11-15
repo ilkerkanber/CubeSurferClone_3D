@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2375058977618463384}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 9.12}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,5 +43,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 641e8728ea30a7c4a89adb2f8d308046, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <count>k__BackingField: 3
-  go: {fileID: 5816628978377998062, guid: bce4d34ac2b8613478f35b920578f71d, type: 3}
+  cubePrefab: {fileID: 5816628978377998062, guid: bce4d34ac2b8613478f35b920578f71d, type: 3}
+  <columnCount>k__BackingField: 0

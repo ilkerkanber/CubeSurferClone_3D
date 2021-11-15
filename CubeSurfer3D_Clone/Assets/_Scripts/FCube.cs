@@ -12,8 +12,8 @@ public class FCube : MonoBehaviour
     }
     void FixedUpdate()
     {
-        CollisionControl(new Vector3(0.49f, 0, -0.6f));
-        CollisionControl(new Vector3(-0.49f, 0, -0.6f));
+        CollisionControl(new Vector3(0.40f, 0, -0.6f));
+        CollisionControl(new Vector3(-0.40f, 0, -0.6f));
     }
     void CollisionControl(Vector3 pos)
     {
