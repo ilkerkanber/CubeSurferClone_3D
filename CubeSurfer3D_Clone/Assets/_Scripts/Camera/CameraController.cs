@@ -9,12 +9,15 @@ public class CameraController : MonoBehaviour
     {
         if (target == null)
         {
-            target = FindObjectOfType<PlayerController>().gameObject;
+            target = GameObject.FindGameObjectWithTag("Player");
         }
     }
     void LateUpdate()
     {
-        WatchTarget();
+        if (target != null)
+        {
+            WatchTarget();
+        }
     }
     void WatchTarget()
     {

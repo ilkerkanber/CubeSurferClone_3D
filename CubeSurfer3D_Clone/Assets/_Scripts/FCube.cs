@@ -6,9 +6,9 @@ public class FCube : MonoBehaviour
 {
     GameObject trash;
     RaycastHit hit;
-    void Awake()
+    void Start()
     {
-        trash = GameObject.FindGameObjectWithTag("TRASH");
+        FindTrasher();
     }
     void FixedUpdate()
     {
@@ -29,9 +29,18 @@ public class FCube : MonoBehaviour
             }
             if (hit.collider.transform.parent.GetComponent<Bag>())
             {
+                hit.collider.transform.parent.GetComponent<Bag>().RemoveCube();
+                FindTrasher();
                 GameObject go = hit.collider.gameObject;
                 go.transform.parent = trash.transform;
             }
+        }
+    }
+    void FindTrasher()
+    {
+        if (trash == null)
+        {
+            trash = GameObject.FindGameObjectWithTag("Trasher");
         }
     }
 

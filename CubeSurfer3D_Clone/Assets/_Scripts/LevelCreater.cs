@@ -14,38 +14,31 @@ public class LevelCreater : MonoBehaviour
 
     GameObject root;
     GameObject createrParent;
+
     int startPoint = 15;
-    int allyCount=0;
-    int foreignCount=0;
-    void Start()
+    int allyCount;
+    int foreignCount;
+
+    void OnEnable()
     {
+        LevelManager.OnNextLevel += CreateLevel;
+        LevelManager.OnRestartLevel += CreateLevel;
+    }
+    void OnDisable()
+    {
+        LevelManager.OnNextLevel -= CreateLevel;
+        LevelManager.OnRestartLevel -= CreateLevel;
+    }
+    public void CreateLevel()
+    {
+        allyCount = 0;
+        foreignCount = 0;
+
         CreateParents();
         CreateRoad(GameManager.Instance.CurrentLevel * 10);
         CreatePlayer();
-        CreateLevel();
-    }
-    void CreatePlayer()
-    {
-        Instantiate(player, Vector3.zero, player.transform.rotation,root.transform);
-    }
-    void CreateParents()
-    {
-        root = new GameObject();
-        root.name = "LEVEL";
-        root.tag = "LEVEL";
-        createrParent = new GameObject();
-        createrParent.name = "Creaters";
-        createrParent.transform.parent = root.transform;
-    }
-    void CreateRoad(int length)
-    {
-        Vector3 newScale = new Vector3(0.5f, 1, length);
-        road.transform.localScale = newScale;
-        Instantiate(road, road.transform.position, road.transform.rotation, root.transform);
-    }
-    void CreateLevel()
-    {
-        for (int i = startPoint; i < (GameManager.Instance.CurrentLevel * 100); i+=5)
+
+        for (int i = startPoint; i < GameManager.Instance.RoadLength; i += 5)
         {
             if (allyCount == foreignCount)
             {
@@ -65,11 +58,35 @@ public class LevelCreater : MonoBehaviour
             }
         }
     }
+    void CreatePlayer()
+    {
+        Instantiate(player, Vector3.zero, player.transform.rotation,root.transform);
+    }
+    void CreateParents()
+    {
+        root = new GameObject();
+        root.name = "LEVEL";
+        root.tag = "LEVEL";
+        createrParent = new GameObject();
+        createrParent.name = "Creaters";
+        createrParent.transform.parent = root.transform;
+        GameObject trasher = new GameObject();
+        trasher.name = "Trasher";
+        trasher.tag = "Trasher";
+        trasher.transform.parent = root.transform;
+    }
+    void CreateRoad(int length)
+    {
+        Vector3 newScale = new Vector3(0.5f, 1, length);
+        road.transform.localScale = newScale;
+        Instantiate(road, road.transform.position, road.transform.rotation, root.transform);
+    }
+    
     void CreateAlly(int posZ)
     {
         if (GetRandom(0, 100) >= 50)
         {
-            int createdCount = GetRandom(0, 5);
+            int createdCount = GetRandom(0, 3);
             
             if (createdCount == 0)
             {

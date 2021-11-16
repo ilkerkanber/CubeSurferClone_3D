@@ -10,17 +10,6 @@ public class Bag : MonoBehaviour
         bag = new List<GameObject>();
         bag.Add(transform.GetChild(0).gameObject);
     }
-    void Update()
-    {
-        if (transform.childCount == 0)
-        {
-            //LOSE
-        }
-        if (transform.childCount < bag.Count)
-        {
-            RemoveCube(bag.Count - transform.childCount);
-        }    
-    }
     public void AddCube(GameObject parent, int count)
     {
         for (int i = 1; i <= count; i++)
@@ -32,18 +21,15 @@ public class Bag : MonoBehaviour
             bag.Add(go);
         }
     }
-    public void RemoveCube(int count)
+    public void RemoveCube()
     {
-        for (int i = bag.Count - 1; i >= count; i--)
-        {
-            bag.RemoveAt(i);
-        }
+        bag.RemoveAt(bag.Count - 1);
     }
-    public void Sort()
+    void Sort()
     {
-        for(int i = 0; i < bag.Count; i++)
+        for(int i = bag.Count-1; i >= 0; i--)
         {
-            bag[i].transform.position += Vector3.up;
+            bag[i].transform.position += (Vector3.up*1.2f);
         }
     }
 }
