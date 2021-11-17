@@ -44,7 +44,7 @@ public class GameManager : ASingleton<GameManager>
  
     void ResetValues()
     {
-        Destroy(GameObject.FindGameObjectWithTag("LEVEL"));
+        DestroyImmediate(GameObject.FindGameObjectWithTag("LEVEL"));
         IsWin = false;
         IsLose = false;
     }

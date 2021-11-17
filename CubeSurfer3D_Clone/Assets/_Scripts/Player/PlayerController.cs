@@ -52,10 +52,13 @@ public class PlayerController : MonoBehaviour
     {
         if (hit.CompareTag("Finish"))
         {
-            Debug.Log("FÝN");
             GameManager.Instance.IsWin = true;
         }
         if (Time.time < bugTimer+0.1f)
+        {
+            return;
+        }
+        if (hit==null)
         {
             return;
         }

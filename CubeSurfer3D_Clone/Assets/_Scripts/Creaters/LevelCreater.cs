@@ -18,6 +18,9 @@ public class LevelCreater : MonoBehaviour
     int startPoint = 15;
     int allyCount;
     int foreignCount;
+    int currentAllyCount;
+    int currentForeignCount;
+
 
     void OnEnable()
     {
@@ -33,6 +36,8 @@ public class LevelCreater : MonoBehaviour
     {
         allyCount = 0;
         foreignCount = 0;
+        currentAllyCount = 0;
+        currentForeignCount = 0;
 
         CreateParents();
         CreateRoad(GameManager.Instance.CurrentLevel * 10);
@@ -57,6 +62,7 @@ public class LevelCreater : MonoBehaviour
                 }
             }
         }
+        LevelControl();
     }
     void CreatePlayer()
     {
@@ -96,6 +102,7 @@ public class LevelCreater : MonoBehaviour
             AllyCreater newAlly = newAllyGo.GetComponent<AllyCreater>();
             newAlly.CreateFixed(newAllyGo, createdCount, 1);
             allyCount += createdCount;
+            currentAllyCount++;
         }
     }
     void CreateForeign(int posZ)
@@ -122,6 +129,15 @@ public class LevelCreater : MonoBehaviour
                     break;
             }
             foreignCount += createdCount;
+            currentForeignCount++;
+        }
+    }
+    void LevelControl()
+    {
+        if(currentAllyCount<=3 || currentForeignCount<= 2)
+        {
+           DestroyImmediate(GameObject.FindGameObjectWithTag("LEVEL"));
+           CreateLevel();
         }
     }
     int GetRandom(int min,int max)
